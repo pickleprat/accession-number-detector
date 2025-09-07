@@ -34,9 +34,10 @@ public:
     std::string getCategory(const std::string& accession);
 
 private:
-    static inline const std::vector<std::string> CURATED = {"NM", "NP", "NR"};
-    static inline const std::vector<std::string> PREDICTED = {"XM", "XR", "XP"};
-    static inline const std::vector<std::string> GENOMIC = {"NG"};
+    static inline const std::vector<std::string> RNA = {"NR_", "XR_"};
+    static inline const std::vector<std::string> MRNA = {"NM_", "XM_"};
+    static inline const std::vector<std::string> GENOMIC = { "AC_", "NC_", "NG_", "NT_", "NW_", "NZ_"};
+    static inline const std::vector<std::string> PROTEIN = { "AP_", "NP_", "YP_", "XP_", "WP_"};
 
     bool isValidPrefix(const std::string& prefix);
 };

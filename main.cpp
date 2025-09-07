@@ -9,7 +9,6 @@ enum DBType {
     REFSEQ = 1,
     DDBJ,
     PDB,
-    KEGG,
     UNKNOWN
 };
 
@@ -40,19 +39,36 @@ int main() {
             std::cout << accession << " belongs to RefSeq Database." << std::endl;
             std::cout << "Category: " << refseq.getCategory(accession) << std::endl;
             break;
+
         case DDBJ:
             std::cout << accession << " belongs to DDBJ Database." << std::endl;
+
+            // drill down into DDBJ subcategories
+            if (ddbj.isSRA(accession)) {
+                std::cout << "Type: SRA (Sequence Read Archive)" << std::endl;
+            } else if (ddbj.isBioSample(accession)) {
+                std::cout << "Type: BioSample" << std::endl;
+            } else if (ddbj.isBioProject(accession)) {
+                std::cout << "Type: BioProject" << std::endl;
+            } else if (ddbj.isConventional(accession)) {
+                std::cout << "Type: Conventional" << std::endl;
+            } else if (ddbj.isBulk(accession)) {
+                std::cout << "Type: Bulk" << std::endl;
+            } else if (ddbj.isMGA(accession)) {
+                std::cout << "Type: MGA" << std::endl;
+            } else {
+                std::cout << "Type: Unknown (DDBJ link)" << std::endl;
+            }
             break;
+
         case PDB:
             std::cout << accession << " belongs to PDB Database." << std::endl;
             break;
-        case KEGG:
-            std::cout << accession << " belongs to KEGG Database." << std::endl;
-            break;
+
         default:
             std::cout << accession << " does not match any known database." << std::endl;
             break;
     }
-    
+
     return 0;
 }

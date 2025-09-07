@@ -7,6 +7,10 @@ bool DDBJDb::detect(const std::string& accession) {
     return isConventional(accession) || isBulk(accession) || isMGA(accession);
 }
 
+bool DDBJDb:: isDBLink(const std::string & accession) {
+    return isSRA(accession) || isBioSample(accession) || isBioProject(accession); 
+}
+
 bool DDBJDb::isConventional(const std::string& accession) {
     int size = accession.size();
     if (size == 6 && firstNCharsAreLetters(accession,1) && countDigits(accession) == 5)
