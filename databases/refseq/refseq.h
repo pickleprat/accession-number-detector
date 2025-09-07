@@ -1,14 +1,14 @@
 #pragma once
 
 // Path to the base class header (adjust if your layout differs).
-// From databases/refspec/refspec.h -> root db.h is at ../../db.h
+// From databases/refseq/refseq.h -> root db.h is at ../../db.h
 #include "db.h"
 
 #include <string>
 #include <vector>
 
 /*
- * RefSpec detector (RefSeq-style accessions)
+ * RefSeq detector (RefSeq-style accessions)
  *
  * Typical RefSeq accession examples:
  *   NM_000546   (curated mRNA)
@@ -19,14 +19,14 @@
  *   NG_XXXXX    (genomic)
  *
  * This class inherits from DB and implements detect(). The implementation
- * (in refspec.cpp) should use the helper functions provided by DB.
+ * (in refseq.cpp) should use the helper functions provided by DB.
  */
 
 
-class RefSpecDb : public DB {
+class RefSeqDb : public DB {
 public:
-    RefSpecDb() = default;
-    ~RefSpecDb() = default;
+    RefSeqDb() = default;
+    ~RefSeqDb() = default;
 
     // Returns true if accession matches RefSeq format
     bool detect(const std::string& accession);

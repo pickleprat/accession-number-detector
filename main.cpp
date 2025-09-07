@@ -1,17 +1,18 @@
 #include <iostream>
 #include <string>
 #include "databases/db.h"
-#include "databases/refspec/refspec.h"
+#include "databases/refseq/refseq.h"
 #include "databases/ddbj/ddbj.h"
 #include "databases/pdb/pdb.h"
 
 enum DBType {
-    REFSPEC = 1,
+    REFSEQ = 1,
     DDBJ,
     PDB,
     KEGG,
     UNKNOWN
 };
+
 
 int main() {
     std::cout << "Welcome to the accession number classifier!" << std::endl;
@@ -20,28 +21,24 @@ int main() {
     std::cout << "Enter an accession number: ";
     std::cin >> accession;
 
-    // Create detector objects
-    RefSpecDb refspec;
+    RefSeqDb refseq;
     DDBJDb ddbj;
     PDBDb pdb;
 
     DBType dbType = UNKNOWN;
 
-    if (refspec.detect(accession)) {
-        dbType = REFSPEC;
+    if (refseq.detect(accession)) {
+        dbType = REFSEQ;
     } else if (ddbj.detect(accession)) {
         dbType = DDBJ;
     } else if (pdb.detect(accession)) {
         dbType = PDB;
     }
-    // else if (kegg.detect(accession)) {
-    //     dbType = KEGG;
-    // }
 
     switch (dbType) {
-        case REFSPEC:
+        case REFSEQ:
             std::cout << accession << " belongs to RefSeq Database." << std::endl;
-            std::cout << "Category: " << refspec.getCategory(accession) << std::endl;
+            std::cout << "Category: " << refseq.getCategory(accession) << std::endl;
             break;
         case DDBJ:
             std::cout << accession << " belongs to DDBJ Database." << std::endl;
@@ -56,6 +53,6 @@ int main() {
             std::cout << accession << " does not match any known database." << std::endl;
             break;
     }
-
+    
     return 0;
 }

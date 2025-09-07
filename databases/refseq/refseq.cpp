@@ -1,6 +1,6 @@
-#include "refspec/refspec.h"
+#include "refseq/refseq.h"
 
-bool RefSpecDb::detect(const std::string& accession) {
+bool RefSeqDb::detect(const std::string& accession) {
     if (accession.size() < 5) return false; // need at least 2 letters + _ + 2 more
 
     std::string prefix = accession.substr(0, 2);
@@ -12,7 +12,7 @@ bool RefSpecDb::detect(const std::string& accession) {
     return isValidPrefix(prefix);
 }
 
-std::string RefSpecDb::getCategory(const std::string& accession) {
+std::string RefSeqDb::getCategory(const std::string& accession) {
     if (!detect(accession)) return "Invalid";
 
     std::string prefix = accession.substr(0, 2);
@@ -30,7 +30,7 @@ std::string RefSpecDb::getCategory(const std::string& accession) {
     return "Unknown";
 }
 
-bool RefSpecDb::isValidPrefix(const std::string& prefix) {
+bool RefSeqDb::isValidPrefix(const std::string& prefix) {
     for (const auto &p : CURATED) if (prefix == p) return true;
     for (const auto &p : PREDICTED) if (prefix == p) return true;
     for (const auto &p : GENOMIC)  if (prefix == p) return true;

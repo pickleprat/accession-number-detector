@@ -1,7 +1,7 @@
 # Compiler and flags
 CXX = g++
 CXXFLAGS = -Wall -Wextra -std=c++17 -g -O2
-INCLUDES = -I. -Idatabases -Idatabases/ddbj -Idatabases/kegg -Idatabases/pdb -Idatabases/refspec
+INCLUDES = -I. -Idatabases -Idatabases/ddbj -Idatabases/kegg -Idatabases/pdb -Idatabases/refseq
 
 # Directories
 SRCDIR = .
@@ -31,7 +31,7 @@ directories:
 	@mkdir -p $(OBJDIR)/ddbj
 	@mkdir -p $(OBJDIR)/kegg
 	@mkdir -p $(OBJDIR)/pdb
-	@mkdir -p $(OBJDIR)/refspec
+	@mkdir -p $(OBJDIR)/refseq
 
 # Main executable
 $(TARGET): $(ALL_OBJECTS)
@@ -52,7 +52,7 @@ $(OBJDIR)/kegg/%.o: databases/kegg/%.cpp databases/kegg/%.h
 $(OBJDIR)/pdb/%.o: databases/pdb/%.cpp databases/pdb/%.h
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -c $< -o $@
 
-$(OBJDIR)/refspec/%.o: databases/refspec/%.cpp databases/refspec/%.h
+$(OBJDIR)/refseq/%.o: databases/refseq/%.cpp databases/refseq/%.h
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -c $< -o $@
 
 # Individual database targets (if you want to build specific modules)
@@ -65,8 +65,8 @@ kegg: directories $(OBJDIR)/kegg/kegg.o
 pdb: directories $(OBJDIR)/pdb/pdb.o
 	@echo "✅ Built PDB module"
 
-refspec: directories $(OBJDIR)/refspec/refspec.o
-	@echo "✅ Built RefSpec module"
+refseq: directories $(OBJDIR)/refseq/refseq.o
+	@echo "✅ Built RefSeq module"
 
 # Run the main program
 run: $(TARGET)
@@ -108,7 +108,7 @@ help:
 	@echo "  ddbj     - Build only DDBJ module"
 	@echo "  kegg     - Build only KEGG module" 
 	@echo "  pdb      - Build only PDB module"
-	@echo "  refspec  - Build only RefSpec module"
+	@echo "  refseq  - Build only refseq module"
 	@echo "  help     - Show this help message"
 
 # Dependency tracking (automatic header dependency detection)
@@ -118,4 +118,4 @@ $(OBJDIR)/%.d: %.cpp
 	@$(CXX) $(CXXFLAGS) $(INCLUDES) -MM -MT $(@:.d=.o) $< > $@
 
 # Phony targets
-.PHONY: all clean rebuild run debug release install help directories ddbj kegg pdb refspec
+.PHONY: all clean rebuild run debug release install help directories ddbj kegg pdb refseq
