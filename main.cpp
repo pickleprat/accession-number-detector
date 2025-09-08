@@ -12,9 +12,43 @@ enum DBType {
     UNKNOWN
 };
 
+void greetUser() {
+    std::cout << "============================================\n";
+    std::cout << "     Accession Number Classifier (CLI)      \n";
+    std::cout << "============================================\n\n";
+
+    std::cout << "This tool helps classify biological accession numbers\n";
+    std::cout << "into their respective databases and categories.\n\n";
+
+    std::cout << "Supported Databases:\n";
+    std::cout << "  1. RefSeq (Reference Sequence Database)\n";
+    std::cout << "     - NM_, NP_, NR_ → Curated mRNA, Protein, RNA\n";
+    std::cout << "     - XM_, XP_, XR_ → Predicted models\n";
+    std::cout << "     - NG_, NC_, NW_, NZ_ → Genomic records\n\n";
+
+    std::cout << "  2. DDBJ (DNA Data Bank of Japan)\n";
+    std::cout << "     Sequence Data:\n";
+    std::cout << "       - Conventional: 1 letter + 5 digits OR 2 letters + 6 digits\n";
+    std::cout << "       - Bulk (WGS/TSA/TLS): 4 letters + 8–10 digits\n";
+    std::cout << "       - MGA: 5 letters + 7 digits\n";
+    std::cout << "     DBLinks:\n";
+    std::cout << "       - BioSample → Biological sample description\n";
+    std::cout << "       - BioProject → Related sequencing projects\n";
+    std::cout << "       - SRA → Raw sequence read archive\n\n";
+
+    std::cout << "  3. PDB (Protein Data Bank)\n";
+    std::cout << "     - Always 4 characters\n";
+    std::cout << "     - First is a digit (1–9), last three are letters or digits\n\n";
+
+    std::cout << "--------------------------------------------\n";
+    std::cout << "Enter an accession number below to classify:\n";
+    std::cout << "--------------------------------------------\n\n";
+}
+
+
 
 int main() {
-    std::cout << "Welcome to the accession number classifier!" << std::endl;
+    greetUser(); 
 
     std::string accession;
     std::cout << "Enter an accession number: ";
