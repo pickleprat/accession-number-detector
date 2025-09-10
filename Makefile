@@ -1,7 +1,7 @@
 # Compiler and flags
 CXX = g++
 CXXFLAGS = -Wall -Wextra -std=c++17 -g -O2
-INCLUDES = -I. -Idatabases -Idatabases/ddbj -Idatabases/kegg -Idatabases/pdb -Idatabases/refseq
+INCLUDES = -I. -Idatabases -Idatabases/ddbj -Idatabases/pdb -Idatabases/refseq
 
 # Directories
 SRCDIR = .
@@ -29,7 +29,6 @@ directories:
 	@mkdir -p $(BINDIR)
 	@mkdir -p $(OBJDIR)
 	@mkdir -p $(OBJDIR)/ddbj
-	@mkdir -p $(OBJDIR)/kegg
 	@mkdir -p $(OBJDIR)/pdb
 	@mkdir -p $(OBJDIR)/refseq
 
@@ -46,9 +45,6 @@ $(OBJDIR)/main.o: main.cpp
 $(OBJDIR)/ddbj/%.o: databases/ddbj/%.cpp databases/ddbj/%.h
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -c $< -o $@
 
-$(OBJDIR)/kegg/%.o: databases/kegg/%.cpp databases/kegg/%.h
-	$(CXX) $(CXXFLAGS) $(INCLUDES) -c $< -o $@
-
 $(OBJDIR)/pdb/%.o: databases/pdb/%.cpp databases/pdb/%.h
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -c $< -o $@
 
@@ -58,9 +54,6 @@ $(OBJDIR)/refseq/%.o: databases/refseq/%.cpp databases/refseq/%.h
 # Individual database targets (if you want to build specific modules)
 ddbj: directories $(OBJDIR)/ddbj/ddbj.o
 	@echo "✅ Built DDBJ module"
-
-kegg: directories $(OBJDIR)/kegg/kegg.o
-	@echo "✅ Built KEGG module"
 
 pdb: directories $(OBJDIR)/pdb/pdb.o
 	@echo "✅ Built PDB module"
@@ -106,7 +99,6 @@ help:
 	@echo "  rebuild  - Clean and build everything"
 	@echo "  install  - Install binary to system"
 	@echo "  ddbj     - Build only DDBJ module"
-	@echo "  kegg     - Build only KEGG module" 
 	@echo "  pdb      - Build only PDB module"
 	@echo "  refseq  - Build only refseq module"
 	@echo "  help     - Show this help message"
@@ -118,4 +110,4 @@ $(OBJDIR)/%.d: %.cpp
 	@$(CXX) $(CXXFLAGS) $(INCLUDES) -MM -MT $(@:.d=.o) $< > $@
 
 # Phony targets
-.PHONY: all clean rebuild run debug release install help directories ddbj kegg pdb refseq
+.PHONY: all clean rebuild run debug release install help directories ddbj pdb refseq

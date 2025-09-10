@@ -15,7 +15,7 @@ enum DBType {
 
 void greetUser() {
     std::cout << "============================================\n";
-    std::cout << "     Accession Number Classifier (CLI)      \n";
+    std::cout << "          WELCOME TO ACCESSIONARY!    \n";
     std::cout << "============================================\n\n";
 
     std::cout << "This tool helps classify biological accession numbers\n";
@@ -23,9 +23,10 @@ void greetUser() {
 
     std::cout << "Supported Databases:\n";
     std::cout << "  1. RefSeq (Reference Sequence Database)\n";
-    std::cout << "     - NM_, NP_, NR_ → Curated mRNA, Protein, RNA\n";
-    std::cout << "     - XM_, XP_, XR_ → Predicted models\n";
-    std::cout << "     - NG_, NC_, NW_, NZ_ → Genomic records\n\n";
+    std::cout << "     - RNA: NR_, XR_\n";
+    std::cout << "     - mRNA: NM_, XM_\n";
+    std::cout << "     - Protein: NP_, XP_, YP_, AP_, WP_\n";
+    std::cout << "     - Genomic: AC_, NC_, NG_, NT_, NW_, NZ_\n\n";
 
     std::cout << "  2. DDBJ (DNA Data Bank of Japan)\n";
     std::cout << "     Sequence Data:\n";
