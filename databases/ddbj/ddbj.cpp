@@ -22,7 +22,7 @@ bool DDBJDb::isConventional(const std::string& accession) {
 
 bool DDBJDb::isBulk(const std::string& accession) {
     int size = accession.size();  
-    if(size >= 12 && size <= 14 && firstNCharsAreLetters(accession, 4) && countAlphabets(accession) >= 8 && countAlphabets(accession) <= 10) {
+    if(size >= 12 && size <= 14 && firstNCharsAreLetters(accession, 4) && countDigits(accession) >= 8 && countDigits(accession) <= 10) {
         return true; 
     }
     return false; 
@@ -30,7 +30,7 @@ bool DDBJDb::isBulk(const std::string& accession) {
 
 bool DDBJDb::isMGA(const std::string& accession) {
     int size = accession.size();  
-    if(size == 12 && firstNCharsAreLetters(accession, 5) && countAlphabets(accession) == 7) {
+    if(size == 12 && firstNCharsAreLetters(accession, 5) && countDigits(accession) == 7) {
         return true; 
     }
     return false; 
@@ -38,7 +38,7 @@ bool DDBJDb::isMGA(const std::string& accession) {
 
 bool DDBJDb:: isSRA(const std::string &accession) {
     int size = accession.size(); 
-    if(size == 9 && firstNCharsAreLetters(accession, 3) && countAlphabets(accession) == 6) {
+    if(size == 9 && firstNCharsAreLetters(accession, 3) && countDigits(accession) == 6) {
         return true;  
     }
     return false; 
@@ -50,7 +50,7 @@ bool DDBJDb:: isBioSample(const std::string & accession) {
                   startsWith(accession, BioSample::toString(BioSample::Type::SAMD)) || 
                   startsWith(accession, BioSample::toString(BioSample::Type::SAMN));   
 
-    if(size == 12 && firstNCharsAreLetters(accession, 4) && countAlphabets(accession) == 8 && status) {
+    if(size == 12 && firstNCharsAreLetters(accession, 4) && countDigits(accession) == 8 && status) {
         return true; 
     }
     return false; 
@@ -65,7 +65,7 @@ bool DDBJDb:: isBioProject(const std:: string & accession) {
                   startsWith(accession, BioProject::toString(BioProject::Type::PRJNA)) ||
                   startsWith(accession, BioProject::toString(BioProject::Type::PRJNZ));
 
-    if(size == 10 && firstNCharsAreLetters(accession, 10) && countAlphabets(accession) && status) {
+    if(size == 10 && firstNCharsAreLetters(accession, 10) && countDigits(accession) && status) {
         return true;  
     }
 
