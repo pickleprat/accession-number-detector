@@ -1,2 +1,2 @@
 obj/main.o: main.cpp databases/db.h databases/refseq/refseq.h \
- databases/ddbj/ddbj.h databases/pdb/pdb.h
+ databases/ddbj/ddbj.h databases/ddbj/categories.h databases/pdb/pdb.h

@@ -34,9 +34,9 @@ void greetUser() {
     std::cout << "       - Bulk (WGS/TSA/TLS): 4 letters + 8–10 digits\n";
     std::cout << "       - MGA: 5 letters + 7 digits\n";
     std::cout << "     DBLinks:\n";
-    std::cout << "       - BioSample → Biological sample description\n";
-    std::cout << "       - BioProject → Related sequencing projects\n";
-    std::cout << "       - SRA → Raw sequence read archive\n\n";
+    std::cout << "       - BioSample --> Biological sample description\n";
+    std::cout << "       - BioProject --> Related sequencing projects\n";
+    std::cout << "       - SRA --> Raw sequence read archive\n\n";
 
     std::cout << "  3. PDB (Protein Data Bank)\n";
     std::cout << "     - Always 4 characters\n";
@@ -78,24 +78,8 @@ int main() {
 
         case DDBJ:
             std::cout << accession << " belongs to DDBJ Database." << std::endl;
-
-            // drill down into DDBJ subcategories
-            if (ddbj.isSRA(accession)) {
-                std::cout << "Type: SRA (Sequence Read Archive)" << std::endl;
-            } else if (ddbj.isBioSample(accession)) {
-                std::cout << "Type: BioSample" << std::endl;
-            } else if (ddbj.isBioProject(accession)) {
-                std::cout << "Type: BioProject" << std::endl;
-            } else if (ddbj.isConventional(accession)) {
-                std::cout << "Type: Conventional" << std::endl;
-            } else if (ddbj.isBulk(accession)) {
-                std::cout << "Type: Bulk" << std::endl;
-            } else if (ddbj.isMGA(accession)) {
-                std::cout << "Type: MGA" << std::endl;
-            } else {
-                std::cout << "Type: Unknown (DDBJ link)" << std::endl;
-            }
-            break;
+            std::cout << "Category: " << ddbj.getCategory(accession) << std::endl;
+            break; 
 
         case PDB:
             std::cout << accession << " belongs to PDB Database." << std::endl;

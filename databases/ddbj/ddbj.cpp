@@ -1,6 +1,7 @@
 #include "ddbj/ddbj.h"
 #include "ddbj/biosample.h" 
 #include "ddbj/bioproject.h" 
+#include "ddbj/categories.h"
 #include <cctype>
 
 bool DDBJDb::detect(const std::string& accession) {
@@ -70,4 +71,21 @@ bool DDBJDb:: isBioProject(const std:: string & accession) {
     }
 
     return false; 
+}
+
+std::string DDBJDb::getCategory(const std::string &accession) {
+    if (isSRA(accession)) {
+        return DDBJCategory::toString(DDBJCategory::Type::SRA);
+    } else if (isBioSample(accession)) {
+        return DDBJCategory::toString(DDBJCategory::Type::BioSample);
+    } else if (isBioProject(accession)) {
+        return DDBJCategory::toString(DDBJCategory::Type::BioProject);
+    } else if (isConventional(accession)) {
+        return DDBJCategory::toString(DDBJCategory::Type::Conventional);
+    } else if (isBulk(accession)) {
+        return DDBJCategory::toString(DDBJCategory::Type::Bulk);
+    } else if (isMGA(accession)) {
+        return DDBJCategory::toString(DDBJCategory::Type::MGA);
+    }
+    return DDBJCategory::toString(DDBJCategory::Type::Unknown);
 }
