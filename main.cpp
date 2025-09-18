@@ -31,7 +31,7 @@ void greetUser() {
     std::cout << "  2. DDBJ (DNA Data Bank of Japan)\n";
     std::cout << "     Sequence Data:\n";
     std::cout << "       - Conventional: 1 letter + 5 digits OR 2 letters + 6 digits\n";
-    std::cout << "       - Bulk (WGS/TSA/TLS): 4 letters + 8–10 digits\n";
+    std::cout << "       - Bulk (WGS/TSA/TLS): 4 letters + 8 to 10 digits\n";
     std::cout << "       - MGA: 5 letters + 7 digits\n";
     std::cout << "     DBLinks:\n";
     std::cout << "       - BioSample --> Biological sample description\n";
@@ -40,7 +40,7 @@ void greetUser() {
 
     std::cout << "  3. PDB (Protein Data Bank)\n";
     std::cout << "     - Always 4 characters\n";
-    std::cout << "     - First is a digit (1–9), last three are letters or digits\n\n";
+    std::cout << "     - First is a digit (1 to 9), last three are letters or digits\n\n";
 
     std::cout << "--------------------------------------------\n";
     std::cout << "Enter an accession number below to classify:\n";

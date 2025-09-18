@@ -5,7 +5,7 @@
 #include <cctype>
 
 bool DDBJDb::detect(const std::string& accession) {
-    return isConventional(accession) || isBulk(accession) || isMGA(accession);
+    return isConventional(accession) || isBulk(accession) || isMGA(accession) || isDBLink(accession);
 }
 
 bool DDBJDb:: isDBLink(const std::string & accession) {
@@ -46,31 +46,20 @@ bool DDBJDb:: isSRA(const std::string &accession) {
 }
 
 bool DDBJDb:: isBioSample(const std::string & accession) {
-    int size = accession.size(); 
     bool status = startsWith(accession, BioSample::toString(BioSample::Type::SAME)) || 
                   startsWith(accession, BioSample::toString(BioSample::Type::SAMD)) || 
                   startsWith(accession, BioSample::toString(BioSample::Type::SAMN));   
-
-    if(size == 12 && firstNCharsAreLetters(accession, 4) && countDigits(accession) == 8 && status) {
-        return true; 
-    }
-    return false; 
+    return status; 
 }
 
 bool DDBJDb:: isBioProject(const std:: string & accession) {
-    int size = accession.size(); 
     bool status = startsWith(accession, BioProject::toString(BioProject::Type::PRJDA)) ||
                   startsWith(accession, BioProject::toString(BioProject::Type::PRJDZ)) ||
                   startsWith(accession, BioProject::toString(BioProject::Type::PRJEZ)) ||
                   startsWith(accession, BioProject::toString(BioProject::Type::PRJEA)) ||
                   startsWith(accession, BioProject::toString(BioProject::Type::PRJNA)) ||
                   startsWith(accession, BioProject::toString(BioProject::Type::PRJNZ));
-
-    if(size == 10 && firstNCharsAreLetters(accession, 10) && countDigits(accession) && status) {
-        return true;  
-    }
-
-    return false; 
+    return status;  
 }
 
 std::string DDBJDb::getCategory(const std::string &accession) {
