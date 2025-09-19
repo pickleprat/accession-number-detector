@@ -46,20 +46,33 @@ bool DDBJDb:: isSRA(const std::string &accession) {
 }
 
 bool DDBJDb:: isBioSample(const std::string & accession) {
+    int size = accession.size(); 
     bool status = startsWith(accession, BioSample::toString(BioSample::Type::SAME)) || 
                   startsWith(accession, BioSample::toString(BioSample::Type::SAMD)) || 
                   startsWith(accession, BioSample::toString(BioSample::Type::SAMN));   
-    return status; 
+    if (size == 12 && firstNCharsAreLetters(accession, 4) && countDigits(accession) == 8 && status) {
+        return true; 
+    }
+    return false ; 
 }
 
 bool DDBJDb:: isBioProject(const std:: string & accession) {
+    int size = accession.size(); 
     bool status = startsWith(accession, BioProject::toString(BioProject::Type::PRJDA)) ||
                   startsWith(accession, BioProject::toString(BioProject::Type::PRJDZ)) ||
                   startsWith(accession, BioProject::toString(BioProject::Type::PRJEZ)) ||
                   startsWith(accession, BioProject::toString(BioProject::Type::PRJEA)) ||
                   startsWith(accession, BioProject::toString(BioProject::Type::PRJNA)) ||
-                  startsWith(accession, BioProject::toString(BioProject::Type::PRJNZ));
-    return status;  
+                  startsWith(accession, BioProject::toString(BioProject::Type::PRJNZ)) || 
+                  startsWith(accession, BioProject::toString(BioProject::Type::PRJDB)); 
+
+    if(size >= 9 && size <= 12 && firstNCharsAreLetters(accession, 5) && countDigits(accession) >= 4 && countDigits(accession) <= 7 && status) {
+        return true; 
+    } else if(status && (countDigits(accession) < 4 || countDigits(accession) > 7)) {
+        std::cout << "Initials are appropriate for DDBJ Category however the number of digits are not in the 4 to 7 range." << std::endl; 
+        return false; 
+    }
+    return false;  
 }
 
 std::string DDBJDb::getCategory(const std::string &accession) {

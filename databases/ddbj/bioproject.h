@@ -8,7 +8,8 @@ namespace BioProject {
         PRJEZ,
         PRJEA,
         PRJNA,
-        PRJNZ
+        PRJNZ, 
+        PRJDB 
     };
 
     inline std::string toString(const Type bp) {
@@ -19,6 +20,7 @@ namespace BioProject {
             case Type::PRJEA: return "PRJEA";
             case Type::PRJNA: return "PRJNA";
             case Type::PRJNZ: return "PRJNZ";
+            case Type::PRJDB: return "PRJDB"; 
             default: return "";
         }
     }
