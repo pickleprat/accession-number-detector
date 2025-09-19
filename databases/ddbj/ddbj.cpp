@@ -39,7 +39,7 @@ bool DDBJDb::isMGA(const std::string& accession) {
 
 bool DDBJDb:: isSRA(const std::string &accession) {
     int size = accession.size(); 
-    if(size == 9 && firstNCharsAreLetters(accession, 3) && countDigits(accession) == 6) {
+    if(size >=9 && size <= 11 && firstNCharsAreLetters(accession, 3) && countDigits(accession) >= 6 && countDigits(accession) <= 8) {
         return true;  
     }
     return false; 
