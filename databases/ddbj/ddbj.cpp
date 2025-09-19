@@ -49,9 +49,16 @@ bool DDBJDb:: isBioSample(const std::string & accession) {
     int size = accession.size(); 
     bool status = startsWith(accession, BioSample::toString(BioSample::Type::SAME)) || 
                   startsWith(accession, BioSample::toString(BioSample::Type::SAMD)) || 
-                  startsWith(accession, BioSample::toString(BioSample::Type::SAMN));   
+                  startsWith(accession, BioSample::toString(BioSample::Type::SAMN)) || 
+                  startsWith(accession, BioSample::toString(BioSample::Type::SAMEA));   
+
     if (size == 12 && firstNCharsAreLetters(accession, 4) && countDigits(accession) == 8 && status) {
         return true; 
+    } else if (firstNCharsAreLetters(accession, 5) && countDigits(accession) == 7 && status) {
+        return true; 
+    } else if(countDigits(accession) < 7 || countDigits(accession) > 8) {
+        std::cout << "Initials are appropriate for DDBJ Category however the number of digits are not 8 or 7.\n"; 
+        return false; 
     }
     return false ; 
 }
