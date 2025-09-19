@@ -56,7 +56,7 @@ bool DDBJDb:: isBioSample(const std::string & accession) {
         return true; 
     } else if (firstNCharsAreLetters(accession, 5) && countDigits(accession) == 7 && status) {
         return true; 
-    } else if(countDigits(accession) < 7 || countDigits(accession) > 8) {
+    } else if((countDigits(accession) < 7 || countDigits(accession) > 8) && status) {
         std::cout << "Initials are appropriate for DDBJ Category however the number of digits are not 8 or 7.\n"; 
         return false; 
     }
@@ -75,7 +75,7 @@ bool DDBJDb:: isBioProject(const std:: string & accession) {
 
     if(size >= 9 && size <= 12 && firstNCharsAreLetters(accession, 5) && countDigits(accession) >= 4 && countDigits(accession) <= 7 && status) {
         return true; 
-    } else if(status && (countDigits(accession) < 4 || countDigits(accession) > 7)) {
+    } else if(status && ((countDigits(accession) < 4 || countDigits(accession) > 7))) {
         std::cout << "Initials are appropriate for DDBJ Category however the number of digits are not in the 4 to 7 range." << std::endl; 
         return false; 
     }
